@@ -38,6 +38,7 @@ public class Main {
         switch(choice) {
             case 1:
                 System.out.println("Array will stay the same.");
+                break;
             case 2:
                 for (int i = 0; i < 32; i++) {
                     nameChecked = names[i];
@@ -48,10 +49,18 @@ public class Main {
                         // System.out.println(namesToPullFrom[i]);
                     }
                 }
+                break;
             case 3:
                 for (int i = 0; i < 32; i++) {
+                    nameChecked = names[i];
+                    blockNum = nameChecked.charAt(0);
 
+                    if((Character.compare(blockNum, blockOne))) {
+                        namesToPullFrom[i] = names[i];
+                        // System.out.println(namesToPullFrom[i]);
+                    }
                 }
+                break;
             default:
                 System.out.println("Choice out of range. Using \"Full Class\" option.");
         }
