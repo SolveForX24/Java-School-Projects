@@ -8,94 +8,85 @@ public class Main {
         // Establish scanner and objects used for reading text. Array to hold names as well.
         Scanner sc = new Scanner(System.in);
         String names[] = new String[32];
-        int blockNums[] = new int[32];
+        String toReplaceComma = "";
         File nameFile;
         Scanner reply;
 
         // Assigns the strings from each line into each part of the array.
+        // Commented out lines were used to test the program
         try {
             nameFile = new File("src/Sophomore.txt");
             reply = new Scanner(nameFile);
-            reply.useDelimiter(",");
             for (int i = 0; i < 32; i++) {
-                blockNums[i] = Integer.parseInt(reply.next());
+                //blockNums[i] = Integer.parseInt(reply.next());
                 names[i] = reply.next();
+
+                // We use a string to replace the comma, because the delimiter was causing problems.
+
+                toReplaceComma = names[i];
+                toReplaceComma = toReplaceComma.replace(",", " ");
+                names[i] = toReplaceComma;
                 //System.out.println(names[i]);
-                System.out.printf("%d %s", blockNums[i], names[i]);
+                System.out.println(names[i]);
             }
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
         }
 
-
-    /*
-        int pulledFrom[] = new int[32];
-
-        System.out.println("How do you want to assign and organize the testers? \nBy Full Class (1), Block 1 (2) or Block 2(3)? ");
+        // Setting up char variables, newly used string array and checking how to sort the names.
+        System.out.println("How do you want to assign and organize the testers? \nBy Block 1 (1), Block 2 (2) or Full Block (3)? ");
         int choice = sc.nextInt();
-
         String namesToPullFrom[] = new String[16];
-        char blockOne = 1;
-        char blockTwo = 2;
-        String nameChecked;
-        char blockNum;
-        int compare = 0;
+
+        // Note that we have to initiate the chars this way, so that in ASCII the char value is either 1 or 2.
+        char blockOne;
+        blockOne = 49;
+        char blockTwo;
+        blockTwo = 50;
+
+        // Running the method desired to separate names.
         switch(choice) {
             case 1:
-                System.out.println("Array will stay the same.");
+                separateNames(names, namesToPullFrom, blockOne);
                 break;
             case 2:
-                //seperateNames(names, namesToPullFrom, blockOne);
-                for (int i = 0; i < 32; i++) {
-                    nameChecked = names[i];
-                    blockNum = nameChecked.charAt(0);
-                    compare = blockNum.compareTo(blockOne);
-                    if(compare == 0) {
-                        namesToPullFrom[i] = names[i];
-                    }
-                    System.out.println(namesToPullFrom[i]);
-                }
+                separateNames(names, namesToPullFrom, blockTwo);
                 break;
             case 3:
-                //seperateNames(names, namesToPullFrom, blockTwo);
-                for (int i = 0; i < 32; i++) {
-                    nameChecked = names[i];
-                    blockNum = nameChecked.charAt(0);
-                    compare = blockNum.compareTo(blockTwo);
-                    if(compare == 0) {
-                        namesToPullFrom[i] = names[i];
-                    }
-                    System.out.println(namesToPullFrom[i]);
-                }
+                System.out.println("Array will stay the same.");
                 break;
             default:
                 System.out.println("Choice out of range. Using \"Full Class\" option.");
         }
 
-        // Secondary array check
-        /*
-        for(int i = 0; i <= 15; i++) {
-            System.out.println(namesToPullFrom[i]);
+        // Reading out new (or old, if chosen) list of students to use.
+        System.out.println("New list of students based on block choice");
+        if (choice != 3) {
+            for (int i = 0; i <= 15; i++) {
+                System.out.println(namesToPullFrom[i]);
+            }
+        } else {
+            for (int i = 0; i <= 31; i++) {
+                System.out.println(names[i]);
+            }
         }
-        */
-
-
     }
-    /*
-    private static String[] seperateNames(String[] n, String[] np, char block) {
+
+    // Method to separate the names, based on original names list and desired block num.
+    private static String[] separateNames(String[] n, String[] np, char block) {
         String nameChecked;
         char blockNum;
-        int compare = 0;
+        int compareInt = 0;
+        int currentPos = 0;
         for (int i = 0; i < 32; i++) {
             nameChecked = n[i];
             blockNum = nameChecked.charAt(0);
-            compare = blockNum.compareTo(block);
-            if(compare == 0) {
-                np[i] = n[i];
+            compareInt = Character.compare(blockNum, block);
+            if(compareInt == 0) {
+                np[currentPos] = n[i];
+                currentPos++;
             }
-            System.out.println(np[i]);
         }
         return np;
     }
-     */
 }
