@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -54,6 +55,7 @@ public class Main {
                 break;
             case 3:
                 System.out.println("Array will stay the same.");
+                Arrays.sort(names);
                 break;
             default:
                 System.out.println("Choice out of range. Using \"Full Class\" option.");
@@ -87,6 +89,7 @@ public class Main {
                 currentPos++;
             }
         }
+        Arrays.sort(np);
         return np;
     }
 }
