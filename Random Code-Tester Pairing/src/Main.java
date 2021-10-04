@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.lang.Object;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,7 +29,6 @@ public class Main {
                 toReplaceComma = toReplaceComma.replace(",", " ");
                 names[i] = toReplaceComma;
                 //System.out.println(names[i]);
-                System.out.println(names[i]);
             }
         } catch (FileNotFoundException e){
             System.out.println(e.getMessage());
@@ -61,16 +61,27 @@ public class Main {
                 System.out.println("Choice out of range. Using \"Full Class\" option.");
         }
 
-        // Reading out new (or old, if chosen) list of students to use.
+        // Reading out new (or old, if chosen) list of students to use. Then duplicating array to randomize.
+        // We also create a randomized int array to reference in printing.
+        String namesToRandomize[];
         System.out.println("New list of students based on block choice");
         if (choice != 3) {
+            namesToRandomize = new String[16];
+            int referencePos[] = new int[16];
             for (int i = 0; i <= 15; i++) {
                 System.out.println(namesToPullFrom[i]);
+                namesToRandomize[i] = namesToPullFrom[i];
+                referencePos[i] = i;
             }
+            MathArrays.shuffle(referencePos);
         } else {
+            namesToRandomize = new String[32];
+            int referencePos[] = new int[16];
             for (int i = 0; i <= 31; i++) {
                 System.out.println(names[i]);
+                namesToRandomize[i] = names[i];
             }
+            MathArrays.shuffle(referencePos);
         }
     }
 
@@ -92,4 +103,6 @@ public class Main {
         Arrays.sort(np);
         return np;
     }
+
+    private static String[] randomizeArray(String[] n, )
 }
