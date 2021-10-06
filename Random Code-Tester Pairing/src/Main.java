@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.lang.Object;
@@ -62,27 +63,35 @@ public class Main {
         }
 
         // Reading out new (or old, if chosen) list of students to use. Then duplicating array to randomize.
-        // We also create a randomized int array to reference in printing.
+        // We also create a randomized int array to reference in printing. We first instantiate the array as
+        // an int array of length 0: then, depending on the choice of the user, we change it's length to be
+        // 16 or 32.
         String namesToRandomize[];
-        System.out.println("New list of students based on block choice");
+        int referencePos[] = new int[0];
         if (choice != 3) {
             namesToRandomize = new String[16];
-            int referencePos[] = new int[16];
+            referencePos = new int[16];
             for (int i = 0; i <= 15; i++) {
-                System.out.println(namesToPullFrom[i]);
                 namesToRandomize[i] = namesToPullFrom[i];
                 referencePos[i] = i;
             }
-            MathArrays.shuffle(referencePos);
+            randomizeArray(referencePos);
         } else {
             namesToRandomize = new String[32];
-            int referencePos[] = new int[16];
+            referencePos = new int [32];
             for (int i = 0; i <= 31; i++) {
-                System.out.println(names[i]);
                 namesToRandomize[i] = names[i];
+                referencePos[i] = i;
             }
-            MathArrays.shuffle(referencePos);
+            randomizeArray(referencePos);
         }
+
+        System.out.println();
+        for (int i = 0; i <= referencePos.length - 1; i++) {
+
+        }
+
+
     }
 
     // Method to separate the names, based on original names list and desired block num.
@@ -104,5 +113,27 @@ public class Main {
         return np;
     }
 
-    private static String[] randomizeArray(String[] n, )
+    /**
+     * Code from method java.util.Collections.shuffle();
+     * Slightly modified
+     */
+
+    private static void swap(int[] n, int i, int j) {
+        int temp = n[i];
+        n[i] = n[j];
+        n[j] = temp;
+    }
+
+    private static int[] randomizeArray(int[] array) {
+
+        Random random = new Random();
+
+        if (random == null) random = new Random();
+        int count = array.length;
+        for (int i = count; i > 1; i--) {
+            swap(array, i - 1, random.nextInt(i));
+        }
+
+        return array;
+    }
 }
