@@ -1,3 +1,9 @@
+/*
+    Name: Xander Russell
+    Lab: Random Coder-Testing Pairings
+    Date: 10/8/21
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
@@ -25,7 +31,6 @@ public class Main {
                 names[i] = reply.next();
 
                 // We use a string to replace the comma, because the delimiter was causing problems.
-
                 toReplaceComma = names[i];
                 toReplaceComma = toReplaceComma.replace(",", " ");
                 names[i] = toReplaceComma;
@@ -78,7 +83,7 @@ public class Main {
             randomizeArray(referencePos);
         } else {
             namesToRandomize = new String[32];
-            referencePos = new int [32];
+            referencePos = new int[32];
             for (int i = 0; i <= 31; i++) {
                 namesToRandomize[i] = names[i];
                 referencePos[i] = i;
@@ -86,11 +91,54 @@ public class Main {
             randomizeArray(referencePos);
         }
 
-        System.out.println();
-        for (int i = 0; i <= referencePos.length - 1; i++) {
-
+        // Checks if you want to print it out by tester or by coder. Changes a string that gets printed based on
+        // that input.
+        System.out.println("Do you want to print out results by tester or by coder? 1/2");
+        int choiceForPrint = sc.nextInt();
+        String choiceString = "";
+        String choiceStringOpposite = "";
+        if (choice == 1) {
+            choiceString = "Tester";
+            choiceStringOpposite = "Coder";
+        } else if (choice == 2){
+            choiceString = "Coder";
+            choiceStringOpposite = "Tester";
+        } else {
+            System.out.println("Invalid response. Printing by tester.");
+            choiceString = "Tester";
+            choiceStringOpposite = "Coder";
         }
 
+        // Variables for printing out.
+        String currentMainPrintOut = "";
+        char currentMainBlockNum;
+        String currentSecondaryPrintOut = "";
+        char currentsecondaryBlockNum;
+
+        // Header to table. Formats and uses the strings assigned based on choice.
+        System.out.format("%38s", "By " + choiceString + "\n");
+        System.out.format("%10s %20s %10s %20s %1s", "Block ", choiceString, "Block ", choiceStringOpposite, "\n");
+        System.out.println("________________________________________________________________________________");
+
+        // Printing out the table. Oh Lord.
+        // We run a for loop based on the length of the array we are printing. Within, we check which array we
+        // are using based on previous input from the user. We assign various strings values based on the value of
+        // i, and the value in the reference int array at pos i. Then, we grab the block num from those strings and
+        // strip the first two chars, the block num and the space. Then we print it out based on format.
+        for (int i = 0; i <= referencePos.length - 1; i++) {
+            if(choice != 3) {
+                currentMainPrintOut = namesToPullFrom[i];
+                currentSecondaryPrintOut = namesToRandomize[referencePos[i]];
+            } else {
+                currentMainPrintOut = names[i];
+                currentSecondaryPrintOut = names[referencePos[i]];
+            }
+            currentMainBlockNum = currentMainPrintOut.charAt(0);
+            currentMainPrintOut = removeFirstTwo(currentMainPrintOut);
+            currentsecondaryBlockNum = currentSecondaryPrintOut.charAt(0);
+            currentSecondaryPrintOut = removeFirstTwo(currentSecondaryPrintOut);
+            System.out.format("%10s %20s %10s %20s", currentMainBlockNum, currentMainPrintOut, currentsecondaryBlockNum, currentSecondaryPrintOut + "\n");
+        }
 
     }
 
@@ -130,10 +178,18 @@ public class Main {
 
         if (random == null) random = new Random();
         int count = array.length;
+        
         for (int i = count; i > 1; i--) {
-            swap(array, i - 1, random.nextInt(i));
+            do {
+                swap(array, i - 1, random.nextInt(i));
+            } while (array[i - 1] == i - 1);
         }
 
         return array;
+    }
+
+    // Removes first 2 chars for print out
+    private static String removeFirstTwo(String s){
+        return s.substring(2);
     }
 }
