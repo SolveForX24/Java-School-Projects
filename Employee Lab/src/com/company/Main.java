@@ -42,7 +42,7 @@ public class Main {
         } while (!(raisePrompt.equalsIgnoreCase("y")) && !(raisePrompt.equalsIgnoreCase("n")));
 
         // If the employee has earned a raise, get percent to raise salary by and call raise salary method.
-        if (raisePrompt.equals("y")) {
+        if (raisePrompt.equalsIgnoreCase("y")) {
             System.out.println("What is the percent raise of " + employee.getName() + "? %");
             double salaryRaise = sc.nextDouble();
             employee.raiseSalary(salaryRaise);
