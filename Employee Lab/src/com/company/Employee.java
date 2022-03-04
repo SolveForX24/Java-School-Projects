@@ -2,7 +2,7 @@ package com.company;
 
 /*
     Purpose of this class is to model an employee.
-    Xander Russell 9/22/21
+    Xander Russell 3/4/22
  */
 
 public class Employee {
