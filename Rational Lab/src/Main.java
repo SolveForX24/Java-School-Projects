@@ -3,11 +3,16 @@
 //Name -
 
 import static java.lang.System.*;
-
+import java.util.Scanner;
 public class Main
 {
     public static void main( String args[] )
     {
+
+        // Create scanner.
+        Scanner sc = new Scanner(System.in);
+
+        // NOTE: This runner code was almost entirely from the lab sheet's given.
         Rational rOne = new Rational(1,2);
         Rational rTwo = new Rational(2,3);
 
@@ -50,6 +55,24 @@ public class Main
         rOne.add(rTwo);
         out.println("\n\n1/6.add(2/8) = "+ rOne);
 
+        //1/2 == 2/4
+        rOne.setRational(1,2);
+        rTwo.setRational(2,4);
+        out.println( "\n\n1/2 == 2/4 is " + rOne.equals(rTwo) );
+
+        // Get num and den of both radicals, then add.
+        out.println("What do you want the numerator of the first radical to be? ");
+        int numOne = sc.nextInt();
+        out.println("What do you want the denominator of the first radical to be? ");
+        int denOne = sc.nextInt();
+        out.println("What do you want the numerator of the second radical to be? ");
+        int numTwo = sc.nextInt();
+        out.println("What do you want the numerator of the second radical to be? ");
+        int denTwo = sc.nextInt();
+        rOne.setRational(numOne, denOne);
+        rTwo.setRational(numTwo, denTwo);
+        rOne.add(rTwo);
+        out.println("Result of adding them together: " + rOne);
 
     }
 }
