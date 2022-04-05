@@ -4,20 +4,24 @@
 
 // Normal header in Triangle.java
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.lang.String;
+import java.text.DecimalFormat;
 
 public class Main  //this class is used to test Triangle
 {
     public static void main( String[] args )
     {
-        // Scanner and variables
+        // Scanner, decimal format and variables
         Scanner keyboard = new Scanner(System.in);
+        DecimalFormat dec = new DecimalFormat("#0.00000");
         String runningPrompt;
         String dummy;
         int a;
         int b;
         int c;
+
         do {
             // Runner code from lab docs
             //ask for user input
@@ -32,14 +36,14 @@ public class Main  //this class is used to test Triangle
 
             Triangle test = new Triangle(a, b, c);
             test.calcPerimeter();
-            System.out.println("Area = " + test.getArea());
+            System.out.println("Area = " + dec.format(test.getArea()));
 
             // See if user wants to run again.
-            System.out.println("\n\nWould you like to run again? (y / anything else) ");
+            System.out.println("\nWould you like to run again? (y / anything else) ");
             dummy = keyboard.nextLine();
             runningPrompt = keyboard.nextLine();
 
-        } while (runningPrompt == "y" && runningPrompt == "Y");
+        } while (runningPrompt.equalsIgnoreCase( "y"));
         System.out.println("Thank you!");
     }
 }
