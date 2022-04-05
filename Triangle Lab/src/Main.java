@@ -35,7 +35,6 @@ public class Main  //this class is used to test Triangle
             c = keyboard.nextInt();
 
             Triangle test = new Triangle(a, b, c);
-            test.calcPerimeter();
             System.out.println("Area = " + dec.format(test.getArea()));
 
             // See if user wants to run again.
